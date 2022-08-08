@@ -44,6 +44,14 @@ public class SpringAMQPTest {
         rabbitTemplate.convertAndSend(exchangeName, "", message);
     }
 
-
+    @Test
+    public void testDirectExchange(){
+        // 队列名称
+        String exchangeName = "itcast.direct";
+        // 消息
+        String message = "hello, red!";
+        // 发送消息，参数分别是：交互机名称、RoutingKey（暂时为空）、消息
+        rabbitTemplate.convertAndSend(exchangeName, "red", message);
+    }
 
 }
