@@ -34,5 +34,16 @@ public class SpringAMQPTest {
 
     }
 
+    @Test
+    public void testFanoutExchange(){
+        // 队列名称
+        String exchangeName = "itcast.fanout";
+        // 消息
+        String message = "hello, everyone!";
+        // 发送消息，参数分别是：交互机名称、RoutingKey（暂时为空）、消息
+        rabbitTemplate.convertAndSend(exchangeName, "", message);
+    }
+
+
 
 }
