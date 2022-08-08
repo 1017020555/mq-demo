@@ -21,4 +21,18 @@ public class SpringAMQPTest {
         rabbitTemplate.convertAndSend(queueName , message);
     }
 
+    @Test
+    public void testWorkQueue() throws Exception{
+
+        String queueName = "simple.queue";
+        String message = "我发生1条message,队列名称:simple.queue";
+
+        for (int i = 0; i < 50; i++) {
+            rabbitTemplate.convertAndSend(queueName , message+i);
+            Thread.sleep(20);
+        }
+
+    }
+
+
 }
