@@ -9,6 +9,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.concurrent.Exchanger;
 
 @Component
@@ -62,7 +63,7 @@ public class SpringRabbitListener {
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(name = "topic.queue1"),
             exchange = @Exchange(value = "itcast.topic",type = ExchangeTypes.TOPIC),
-            key = "china.#"
+            key = {"china.#","#.news"}
     )
     )
     public void listenTopicQueue1(String msg){
@@ -73,7 +74,7 @@ public class SpringRabbitListener {
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(name = "topic.queue2"),
             exchange = @Exchange(value = "itcast.topic",type = ExchangeTypes.TOPIC),
-            key = "#.news"
+            key = {"#.news"}
     )
     )
     public void listenTopicQueue2(String msg){
@@ -81,7 +82,10 @@ public class SpringRabbitListener {
     }
 
 
-
+    @RabbitListener(queues = "object.queue")
+    public void listenObjectQueue(Map<String,Object> msg){
+        System.out.println("objectQueue: "+msg);
+    }
 
 
 }
