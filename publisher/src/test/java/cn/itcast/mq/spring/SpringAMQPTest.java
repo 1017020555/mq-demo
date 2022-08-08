@@ -36,7 +36,7 @@ public class SpringAMQPTest {
 
     @Test
     public void testFanoutExchange(){
-        // 队列名称
+
         String exchangeName = "itcast.fanout";
         // 消息
         String message = "hello, everyone!";
@@ -46,12 +46,21 @@ public class SpringAMQPTest {
 
     @Test
     public void testDirectExchange(){
-        // 队列名称
+
         String exchangeName = "itcast.direct";
         // 消息
         String message = "hello, red!";
-        // 发送消息，参数分别是：交互机名称、RoutingKey（暂时为空）、消息
+
         rabbitTemplate.convertAndSend(exchangeName, "red", message);
     }
 
+    @Test
+    public void testTopicExchange(){
+
+        String exchangeName = "itcast.topic";
+        // 消息
+        String message = "hello, china.aa!";
+
+        rabbitTemplate.convertAndSend(exchangeName, "china.aa", message);
+    }
 }
